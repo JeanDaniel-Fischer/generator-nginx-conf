@@ -4,7 +4,10 @@ var utils = require('./utils');
 function promptAndGenerate(prompts, generator, templatePath) {
   return generator.prompt(prompts).then(props => {
     props.pattern = convertPattern(props);
-    return utils.render(generator.templatePath(templatePath), props);
+    return utils.render(
+      generator.templatePath('../../shared/templates/' + templatePath),
+      props
+    );
   });
 }
 

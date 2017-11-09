@@ -2,7 +2,7 @@
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 // Module
-const main = require('./main');
+const main = require('../shared/main');
 
 module.exports = class extends Generator {
   prompting() {

@@ -55,7 +55,10 @@ module.exports = {
     return generator.prompt(prompts).then(props => {
       return addLocation(generator, []).then(locations => {
         props.locations = locations;
-        return utils.render(generator.templatePath('server.conf'), props);
+        return utils.render(
+          generator.templatePath('../../shared/templates/server.conf'),
+          props
+        );
       });
     });
   }

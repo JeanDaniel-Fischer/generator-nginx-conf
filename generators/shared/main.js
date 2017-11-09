@@ -60,7 +60,7 @@ module.exports = {
   },
   writing: function(generator, props) {
     generator.fs.copyTpl(
-      generator.templatePath('nginx.conf'),
+      generator.templatePath('../../shared/templates/nginx.conf'),
       generator.destinationPath('nginx.conf'),
       props
     );
