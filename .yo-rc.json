@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Jean-Daniel Fischer",
+      "authorEmail": "jeandaniel.fischer@gmail.com",
+      "authorUrl": ""
+    }
+  }
+}
