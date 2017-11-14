@@ -50,12 +50,21 @@ var prompt = [
 ];
 
 module.exports = {
-  prompting: function(generator) {
-    return generator.prompt(prompt).then(props => {
-      return server.promptAndGenerate(generator).then(serverSection => {
-        props.server = utils.indent(1, serverSection);
-        return props;
-      });
+  prompting: function(generator, preset) {
+    var prompts = prompt;
+    if (preset !== undefined) {
+      prompts = utils.copyDefaultAndReturnMissing(prompts, preset);
+    }
+    return generator.prompt(prompts).then(props => {
+      if (preset !== undefined) {
+        Object.assign(props, preset);
+      }
+      return server
+        .promptAndGenerate(generator, preset, props.locations)
+        .then(serverSection => {
+          props.server = utils.indent(1, serverSection);
+          return props;
+        });
     });
   },
   writing: function(generator, props) {

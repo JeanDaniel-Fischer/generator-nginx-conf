@@ -1,8 +1,15 @@
 'use strict';
 var utils = require('./utils');
 
-function promptAndGenerate(prompts, generator, templatePath) {
-  return generator.prompt(prompts).then(props => {
+function promptAndGenerate(prompts, generator, templatePath, preset) {
+  var computePrompt = prompts;
+  if (preset !== undefined) {
+    computePrompt = utils.copyDefaultAndReturnMissing(prompts, preset);
+  }
+  return generator.prompt(computePrompt).then(props => {
+    if (preset !== undefined) {
+      Object.assign(props, preset);
+    }
     props.pattern = convertPattern(props);
     return utils.render(
       generator.templatePath('../../shared/templates/' + templatePath),
@@ -95,16 +102,16 @@ module.exports = {
       return null;
     });
   },
-  cache: function(generator) {
-    return promptAndGenerate(promptCache, generator, 'location_cache.conf');
+  cache: function(generator, preset) {
+    return promptAndGenerate(promptCache, generator, 'location_cache.conf', preset);
   },
-  index: function(generator) {
-    return promptAndGenerate(promptMatcher, generator, 'location_indexing.conf');
+  index: function(generator, preset) {
+    return promptAndGenerate(promptMatcher, generator, 'location_indexing.conf', preset);
   },
-  deny: function(generator) {
-    return promptAndGenerate(promptMatcher, generator, 'location_deny.conf');
+  deny: function(generator, preset) {
+    return promptAndGenerate(promptMatcher, generator, 'location_deny.conf', preset);
   },
-  tryfiles: function(generator) {
-    return promptAndGenerate(promptTry, generator, 'location_tryfiles.conf');
+  tryfiles: function(generator, preset) {
+    return promptAndGenerate(promptTry, generator, 'location_tryfiles.conf', preset);
   }
 };

@@ -51,8 +51,22 @@ function addLocation(generator, locations) {
 }
 
 module.exports = {
-  promptAndGenerate: function(generator) {
-    return generator.prompt(prompts).then(props => {
+  promptAndGenerate: function(generator, preset, presetLocations) {
+    var computePrompt = prompts;
+    if (preset !== undefined) {
+      computePrompt = utils.copyDefaultAndReturnMissing(prompts, preset);
+    }
+    return generator.prompt(computePrompt).then(props => {
+      if (preset !== undefined) {
+        Object.assign(props, preset);
+      }
+      if (presetLocations !== undefined) {
+        props.locations = presetLocations;
+        return utils.render(
+          generator.templatePath('../../shared/templates/server.conf'),
+          props
+        );
+      }
       return addLocation(generator, []).then(locations => {
         props.locations = locations;
         return utils.render(
