@@ -1,6 +1,6 @@
 {
   "name": "generator-nginx-conf",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Yeoman generator for easy bootstraping of nginx config file.",
   "homepage": "https://github.com/JeanDaniel-Fischer/generator-nginx-conf",
   "author": {
