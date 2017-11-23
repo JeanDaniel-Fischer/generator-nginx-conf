@@ -10,11 +10,18 @@ npm install -g yo
 npm install -g generator-nginx-conf
 ```
 
-Then generate your new project:
+Then generate your nginx conf:
 
 ```bash
 yo nginx-conf
 ```
+
+You can also use the set of sub generator according to your need :
+* yo nginx-conf:server allow to only create a server section.
+* yo nginx-conf:angular allow to create a nginx conf made for an Angular app. The same as main generator but with a lot of presets.
+
+## Contributing
+Feel free to open issues, send merge request and ask for improvements.
 
 ## Getting To Know Yeoman
 
