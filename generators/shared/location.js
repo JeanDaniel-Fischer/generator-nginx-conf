@@ -28,6 +28,9 @@ function convertPattern(props) {
   if (props.pattern === 'styles') {
     return 'css';
   }
+  if (props.pattern === 'script') {
+    return 'js';
+  }
   if (props.pattern === 'static') {
     return 'html|htm|shtml';
   }
@@ -39,8 +42,8 @@ var promptCache = [
     type: 'list',
     name: 'pattern',
     message: 'List of file extension concerned',
-    default: 'error',
-    choices: ['images', 'fonts', 'styles', 'static']
+    default: 'images',
+    choices: ['images', 'fonts', 'styles', 'static', 'script']
   },
   {
     type: 'input',

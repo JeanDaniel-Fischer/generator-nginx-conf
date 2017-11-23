@@ -29,6 +29,10 @@ const presetCacheFonts = {
   pattern: 'fonts',
   expire: 'max'
 }
+const presetCacheJson = {
+  pattern: 'script',
+  expire: 'max'
+}
 const presetTry = {
   matcher: '/',
   file: '$uri /index.html'
@@ -41,22 +45,20 @@ module.exports = class extends Generator {
 
     // All locations
     return location.cache(this, presetCacheImages).then(resCI => {
-      console.log(1);
       curPreset.locations.push(utils.indent(1, resCI));
     }).then( () => {
-      console.log(2);
       return location.cache(this, presetCacheFonts);
     }).then(resCF => {
-      console.log(3);
       curPreset.locations.push(utils.indent(1, resCF));
     }).then( () => {
-      console.log(4);
+      return location.cache(this, presetCacheJson);
+    }).then(resJson => {
+      curPreset.locations.push(utils.indent(1, resJson));
+    }).then( () => {
       return location.tryfiles(this, presetTry);
     }).then(resT => {
-      console.log(5);
       curPreset.locations.push(utils.indent(1, resT));
     }).then( () => {
-      console.log(6);
       return main.prompting(this, curPreset).then(props => {
         this.props = props;
       });

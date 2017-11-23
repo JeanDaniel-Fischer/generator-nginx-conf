@@ -7,7 +7,7 @@ var prompts = [
     type: 'input',
     name: 'listen',
     message: 'Http port',
-    default: '80'
+    default: '80 http2'
   },
   {
     type: 'input',
